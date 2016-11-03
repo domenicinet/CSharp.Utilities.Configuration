@@ -3,11 +3,15 @@ Strongly-typed configuration settings for .NET projects
 
 ## Let's get to the point right away
 You are going to move from this:
-        int maxRetries = Convert.ToInt32(WebConfigurationManager.AppSettings["maxRetries"]);
+```
+int maxRetries = Convert.ToInt32(WebConfigurationManager.AppSettings["maxRetries"]);
+```
 to this:
-        int maxRetries = FrontEndSettings.Login.MaxRetries;
+```
+int maxRetries = FrontEndSettings.Login.MaxRetries;
+```
 
-## How does it happen?
+## It that sounds interesting, how does it happen?
 This library allows you to create strongly-types application settings in your .NET projects.
 Application settings are stored in XML files, much similar in form and intent to the appSettings tag in your web.config or app.config files.
 
