@@ -119,4 +119,56 @@ Compile your project then add a reference to its settings library.
 If the project's name is <b>FrontEnd</b>, you will find library <b>FrontEndSettings.dll</b> in <b>packages/domenici.settings</b>
 
 ### Step 6
-From now on, you will be able to reference your strongly-typed settings from class Domenici.Utilities.Configuration.FrontEndSettings :)
+From now on, you will be able to reference your strongly-typed settings from class:
+```
+Domenici.Utilities.Configuration.FrontEndSettings
+```
+
+## Format of the settings file
+A settings file must have extension .appsettings and it must have this structure:
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<appSettings>
+    <item key="RootItem" value="Hello" />
+</appSettings>
+```
+Which is used as:
+```
+string value = FrontEndSettings.RootItem;
+```
+
+### Specifying types other than string
+All settings are returned as <b>string</b> by default, but you can override this behaviour by specifying a type:
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<appSettings>
+    <item key="Age" value="44" type="int" />
+</appSettings>
+```
+Which is used as:
+```
+int age = FrontEndSettings.Age;
+```
+
+### Specifying multi-line values
+Another great advantage of this library is the possibility of specifying values that span multiple lines, as follows:
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<appSettings>
+    <item key="Welcome">
+        Welcome my son, 
+        welcome to The Machine!
+    </item>
+</appSettings>
+```
+
+You may also use CDATA blocks in order to avoid escaping characters: 
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<appSettings>
+    <item key="Welcome"><![CDATA[
+        Welcome my son, 
+        <b>welcome to <i>The Machine</i>!</b>
+    ]]></item>
+</appSettings>
+```
