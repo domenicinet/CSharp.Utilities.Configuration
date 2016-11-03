@@ -172,3 +172,38 @@ You may also use CDATA blocks in order to avoid escaping characters:
     ]]></item>
 </appSettings>
 ```
+
+## Sections
+You can add any number of nested sections. For instence, this settings file:
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<appSettings>
+    <item key="Welcome" value="Welcome!!!" />
+    <section name="Login">
+        <item key="MaxPasswordLength" value="7" type="int" />
+        <section name="ErrorMessages">
+            <item key="Message1" value="Wrong user name or passowrd" />
+        </section>
+    </section>
+</appSettings>
+```
+
+Would be used as follows:
+```
+string welcomeMessage = FrontEndSettings.Welcome;
+int maxPwdLength = FrontEndSettings.Login.MaxPasswordLength;
+string wrongCredentialsMessage = FrontEndSettings.Login.ErrorMessages.Message1;
+```
+
+## Conclusions
+I believe this library to be useful in reducing errors due to mistypings of strings. 
+I avoid hard coding constants in my source code at all costs so I tend to eliminate everything that's between quotes and all numbers.
+
+I want the flexibility to change costants at runtime without having to recompile anything, and I also want to make sure that code is solid and it will not fail because I wrote "pasword" where I should have written "password".
+
+If you agree with me, I welcome you to try this library out and to contribute to it in any way you feel comfortable with: a comment, a suggestion, a code patch or a whole tool to make it better! 
+
+Thank You
+
+Alex Domenici
+alx.domenici@gmail.com
