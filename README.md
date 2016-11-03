@@ -109,3 +109,14 @@ In Visual Studio, select your project then ALT+ENTER to view the project's setti
 ```
 $(SolutionDir)packages\Domenici.Utilities\Domenici.Utilities.Configuration.SettingsMaker\domenicisettingsmaker.exe $(ProjectDir)domenici.settings $(SolutionDir)packages\domenici.settings $(ProjectName) /library
 ```
+Once you build your solution, the project's settings will be copied as a DLL in <b>/packages/domenici.settings</b>
+You will then typically reference this DLL from the project itself.
+
+Please note: omitting <b>/library</b> will generate a C# class file (SourceCode.cs)
+
+### Step 5
+Compile your project then add a reference to its settings library.
+If the project's name is <b>FrontEnd</b>, you will find library <b>FrontEndSettings.dll</b> in <b>packages/domenici.settings</b>
+
+### Step 6
+From now on, you will be able to reference your strongly-typed settings from class Domenici.Utilities.Configuration.FrontEndSettings :)
