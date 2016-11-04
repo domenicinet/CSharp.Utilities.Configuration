@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25123.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{E190AEF9-4EA7-4D2C-AC85-A9C6BF054D51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{EE155544-12B8-4675-A9A8-F01D2F3E6462}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{012CC43A-2EC9-4E02-9252-803FF1B98BD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domenici.Utilities.Configuration", "Domenici.Utilities.Configuration\Domenici.Utilities.Configuration.csproj", "{84FD91F9-FCD3-4412-801A-220CC3147C22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domenici.Utilities.Configuration.SettingsMaker", "Domenici.Utilities.Configuration.SettingsMaker\Domenici.Utilities.Configuration.SettingsMaker.csproj", "{0FE91D4A-34CD-4035-AF72-B626AB17AABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domenici.Utilities.Configuration.Tests", "Domenici.Utilities.Configuration.Tests\Domenici.Utilities.Configuration.Tests.csproj", "{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84FD91F9-FCD3-4412-801A-220CC3147C22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84FD91F9-FCD3-4412-801A-220CC3147C22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84FD91F9-FCD3-4412-801A-220CC3147C22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84FD91F9-FCD3-4412-801A-220CC3147C22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FE91D4A-34CD-4035-AF72-B626AB17AABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FE91D4A-34CD-4035-AF72-B626AB17AABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FE91D4A-34CD-4035-AF72-B626AB17AABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FE91D4A-34CD-4035-AF72-B626AB17AABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{84FD91F9-FCD3-4412-801A-220CC3147C22} = {E190AEF9-4EA7-4D2C-AC85-A9C6BF054D51}
+		{0FE91D4A-34CD-4035-AF72-B626AB17AABE} = {012CC43A-2EC9-4E02-9252-803FF1B98BD7}
+		{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6} = {EE155544-12B8-4675-A9A8-F01D2F3E6462}
+	EndGlobalSection
+EndGlobal

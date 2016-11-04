@@ -1,0 +1,11 @@
+﻿{
+  "Title": "This is my title",
+  "Property": {
+    "Sub": "This is a sub property",
+    "Integer": 10
+  },
+  "Items":[
+	{ "Title" : "test1" },
+	{ "Title" : "test2" }
+  ]
+}

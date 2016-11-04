@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<appSettings timeout="5">
+    <item key="TestSetting" value="This is a test setting." />
+    <item key="IntegerSetting" value="100" type="int" />
+</appSettings>
