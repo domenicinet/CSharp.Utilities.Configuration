@@ -206,5 +206,3 @@ I welcome you to try this library out and to contribute to it in any way you fee
 Thank You
 
 Alex Domenici
-<br/>
-alx.domenici@gmail.com
