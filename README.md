@@ -1,8 +1,9 @@
-<I>NOTE TO THE READER: 
-THE LIBRARY - IN ITS PROPRIETARY FORM - HAS BEEN USED FOR ALMOST ONE YEAR IN SEVERAL LIVE PROJECTS IN THE FINANCE SECTOR (READ: LOTS OF TRANSACTIONS). PLEASE BEAR WITH US AND IF YOU LIKE THIS IDEA THEN FEEL FREE TO COMMENT AND GIVE YOUR SUGGESTIONS!</I>
-
 # CSharp.Utilities.Configuration
 Strongly-typed configuration settings for .NET projects
+
+THis library (in its proprietary form) has been used for over 1 year in several live projects in the finance sector. 
+I am now sharing this work as an open source project beca I believe there are a lot of benefits in using strongly-typed settings is all applications.
+Please give it a try - there's a Visual Studio sample solution in folder <b>/samples</b> that really tells it all - and feel free to comment or contribute in any way you deem appropriate. 
 
 ## Let's get to the point right away
 You are going to move from this:
@@ -56,7 +57,7 @@ this.welcomeDiv.Html = FrontEndSettings.WelcomeMessage;
 ## Transitioning
 The library allows you to read settings in two ways:
 #### Array key
-You can retrieve a values in the same way you use the ConfigurationManager.AppSettings["key"] to read settings from a config file.
+You can retrieve values in the same way you use the ConfigurationManager.AppSettings["key"] to read settings from a config file.
 This is useful when you start porting your existing code to the new library, as it allows you to move settings away from you web.config or app.config files without having to refactor too much code.
 
 ```
@@ -68,9 +69,8 @@ int maxRetries = Convert.ToInt32(SettingsManager.GetValue("maxRetries"));
 ```
 
 #### Strongly-typed
-You can retrieve a value by using it's property in the auto-generated settings class.
+You can retrieve any value by using it's property in the auto-generated settings class.
 This is the default way of using this library, and the reason why you're reading this.
-
 
 ```
 int maxRetries = Convert.ToInt32(WebConfigurationManager.AppSettings["maxRetries"]);
@@ -105,12 +105,15 @@ Download Domenici.Utilities.Configuration from NUGet, it will be located in your
 ### Step 4
 In Visual Studio, select your project then ALT+ENTER to view the project's settings. Select "Build Events" then enter the following pre-build event:
 ```
-$(SolutionDir)packages\Domenici.Utilities\Domenici.Utilities.Configuration.SettingsMaker\domenicisettingsmaker.exe $(ProjectDir)domenici.settings $(SolutionDir)packages\domenici.settings $(ProjectName) /library
+$(SolutionDir)packages\Domenici.Utilities.configuration-net40\Domenici.Utilities.Configuration.SettingsMaker\Domenici.Utilities.Configuration.SettingsMaker.exe $(ProjectDir)domenici.settings $(SolutionDir)packages\domenici.settings $(ProjectName) /library
 ```
-Once you build your solution, the project's settings will be copied as a DLL in <b>/packages/domenici.settings</b>
-You will then typically reference this DLL from the project itself.
+This pre-build batch launches the Settings Maker that you have obtained via NUGet with the following parameters:
+1. Path to the folder containing all settings
+2. Path to the folder that will contain the generated library (the folder must exists)
+3. Name of the library (here we use the project's name)
+3. Type of output, where <b>/library</b> indicated that we wish to generate a compiled DLL (omitting <b>/library</b> will generate a C# class file)
 
-Please note: omitting <b>/library</b> will generate a C# class file (SourceCode.cs)
+Once you build your solution, the project's settings will be copied as a DLL in <b>/packages/domenici.settings</b>
 
 ### Step 5
 Compile your project then add a reference to its settings library.
@@ -194,14 +197,14 @@ string wrongCredentialsMessage = FrontEndSettings.Login.ErrorMessages.Message1;
 ```
 
 ## Conclusions
-I believe this library to be useful in reducing errors due to mistypings of strings. 
-I avoid hard coding constants in my source code at all costs so I tend to eliminate everything that's between quotes and all numbers.
+I believe this library to be useful in reducing errors due to mistypings of strings and other constants in code. 
 
 I want the flexibility to change costants at runtime without having to recompile anything, and I also want to make sure that code is solid and it will not fail because I wrote "pasword" where I should have written "password".
 
-If you agree with me, I welcome you to try this library out and to contribute to it in any way you feel comfortable with: a comment, a suggestion, a code patch or a whole tool to make it better! 
+I welcome you to try this library out and to contribute to it in any way you feel comfortable with: a comment, a suggestion, a code patch or a whole tool to make it better! 
 
 Thank You
 
 Alex Domenici
+<br/>
 alx.domenici@gmail.com
