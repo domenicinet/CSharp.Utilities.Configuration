@@ -175,7 +175,7 @@ You may also use CDATA blocks in order to avoid escaping characters:
 ```
 
 ## Sections
-You can add any number of nested sections. For instence, this settings file:
+You can add any number of nested sections. For instance, this settings file:
 ```
 <?xml version="1.0" encoding="utf-8" ?>
 <appSettings>
@@ -189,7 +189,7 @@ You can add any number of nested sections. For instence, this settings file:
 </appSettings>
 ```
 
-Would be used as follows:
+Will be used as follows:
 ```
 string welcomeMessage = FrontEndSettings.Welcome;
 int maxPwdLength = FrontEndSettings.Login.MaxPasswordLength;
