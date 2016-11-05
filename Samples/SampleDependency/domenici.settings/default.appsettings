@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<appSettings>
+  <!--
+  There are simple placehilders needed to gereate the strongly-typed class. There's no need to 
+  actually insert real values in this file (but it is not forbidden) as the app that uses this 
+  dependency will have a copy of the settings XML in its path.
+  -->
+  <section name="SampleDependency">
+    <item key="ApplicationName" value="" />
+    <item key="WelcomeMessage" value="" />
+    <item key="DoneMessage" value="" />
+  </section>
+</appSettings>

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<appSettings timeout="300">
+  <item key="ApplicationVersion"><![CDATA[Version 1.0.0 <Domenici.Utilities.Configuration>]]></item>
+  <section name="DataSamples">
+    <item key="StringSetting" value="Domenici.Net" />
+    <item key="IntegerSetting" value="100" type="int" />
+    <item key="DecimalSetting" value="99.90" type="decimal" />
+    <item key="BooleanSetting" value="true" type="bool" />
+  </section>
+  <section name="SampleDependency">
+    <item key="ApplicationName" value="Sample Application" source="external" />
+    <item key="WelcomeMessage">
+      ******************
+      {0}
+      ******************
+      This is a sample application which demonstrates the use of strongly
+      typed configuration files via Domenici.Utilities.Configuration
+      ******************
+      You have just seen the output generated when the settings have been loaded,
+      now please press any key to see this sample app retrieve and use those settings.
+    </item>
+    <item key="DoneMessage">
+      ******************
+      Please press any key to quit.
+    </item>
+  </section>
+</appSettings>
