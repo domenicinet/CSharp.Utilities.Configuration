@@ -1,4 +1,4 @@
-# CSharp.Utilities.Configuration
+# Domenici.Utilities.Configuration
 Strongly-typed configuration settings for .NET projects
 
 This library (in its proprietary form) has been used for over 1 year in several live projects in the finance sector. 
