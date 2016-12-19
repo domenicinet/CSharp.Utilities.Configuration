@@ -22,12 +22,17 @@ namespace Domenici.Utilities.Configuration
 
         public XmlDocument LoadSettings(string filePath, bool ignoreExternalSource = false)
         {
-            this.ignoreExternalSource = ignoreExternalSource;
-
-            #region Load settings file
             XmlDocument doc = new XmlDocument();
             doc.Load(filePath);
 
+            return this.LoadSettings(doc, ignoreExternalSource);
+        }
+
+        public XmlDocument LoadSettings(XmlDocument doc, bool ignoreExternalSource = false)
+        {
+            this.ignoreExternalSource = ignoreExternalSource;
+
+            #region Load settings file
             // Get all settings at root level
             foreach (XmlNode node in doc.DocumentElement.SelectNodes("item"))
             {
@@ -56,9 +61,9 @@ namespace Domenici.Utilities.Configuration
 
                         settingsList.Add(new SettingProperties()
                         {
-                            Key   = key,
+                            Key = key,
                             Value = value,
-                            Type  = node.Attributes["type"] == null ? "string" : (string.IsNullOrEmpty(node.Attributes["type"].Value) ? "string" : node.Attributes["type"].Value)
+                            Type = node.Attributes["type"] == null ? "string" : (string.IsNullOrEmpty(node.Attributes["type"].Value) ? "string" : node.Attributes["type"].Value)
                         });
 
                         Console.WriteLine($"Found settings: {key}");

@@ -7,10 +7,10 @@ namespace DomeniciSettingsManager
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("Generating Configuration code.");
+
             try
             {
-                Console.WriteLine("Generating Configuration code.");
-
                 string targetLibrary = string.Format("{0}.domenici.settings.dll", args[2]);
 
                 Console.WriteLine("Source path: " + args[0]);

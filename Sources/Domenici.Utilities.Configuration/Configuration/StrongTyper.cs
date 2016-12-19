@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml;
 
 namespace Domenici.Utilities.Configuration
 {    
@@ -17,15 +18,55 @@ namespace Domenici.Utilities.Configuration
             CompiledLibrary = 1
         }
 
+        public enum RunModes
+        {
+            SingleSourceFile    = 0,
+            MultipleSourceFiles = 1
+        }
+
+        #region Single source file mode variables
+        private string settingsFileContents;
+        string classNamespace;
+        string className;
+        #endregion
+
+        #region Multiple source files mode variables
         private string appSettingsFolder;
         private string outputFolder;
         private string libraryName;
+        #endregion
+
         private OutputTypes outputType;
+        private readonly RunModes runMode;
 
         private List<SettingProperties> settingsList;
 
+        /// <summary>
+        /// This constructor prepares the class for the generation of a strongly typed 
+        /// C# file obtained by analyzing the given setting file.
+        /// </summary>
+        /// <param name="settingsFileContents"></param>
+        /// <param name="classNamespace"></param>
+        /// <param name="className"></param>
+        public StrongTyper(string settingsFileContents, string classNamespace, string className)
+        {
+            this.settingsFileContents = settingsFileContents;
+            this.runMode         = RunModes.SingleSourceFile;
+            this.outputType      = OutputTypes.SourceCode;
+        }
+
+        /// <summary>
+        /// This constructor prepares the class for the generation of a strongly typed 
+        /// library (or C# file) obtained by analyzing one or more setting files in a 
+        /// given folder.
+        /// </summary>
+        /// <param name="appSettingsFolder"></param>
+        /// <param name="outputFolder"></param>
+        /// <param name="libraryName"></param>
+        /// <param name="outputType"></param>
         public StrongTyper(string appSettingsFolder, string outputFolder, string libraryName, OutputTypes outputType)
         {
+            
             if (!Directory.Exists(appSettingsFolder))
             { 
                 throw new DirectoryNotFoundException(string.Format("Cannot find directory: {0}", appSettingsFolder));
@@ -39,11 +80,17 @@ namespace Domenici.Utilities.Configuration
             this.appSettingsFolder = appSettingsFolder;
             this.outputFolder      = outputFolder;
             this.libraryName       = libraryName;
+            this.runMode           = RunModes.MultipleSourceFiles;
             this.outputType        = outputType;
         }
 
         public void CreateStronglyTypedClass()
         {
+            if (this.runMode != RunModes.MultipleSourceFiles)
+            {
+                throw new InvalidOperationException("Function 'CreateStronglyTypedClass' is not available when run mode is set to 'SingleSourceFile'.");
+            }
+
             Console.WriteLine("Loading settings...");
             LoadSettings();
             Console.WriteLine("Done loading settings.");
@@ -116,6 +163,24 @@ namespace Domenici.Utilities.Configuration
                 Console.WriteLine("Done generating C# source code.");
                 #endregion
             }
+        }
+
+        public string CreateStronglyTypedOutput()
+        {
+            if (this.runMode != RunModes.SingleSourceFile)
+            {
+                throw new InvalidOperationException("Function 'CreateStronglyTypedOutput' is not available when run mode is set to 'MultipleSourceFiles'.");
+            }
+
+            Console.WriteLine("Loading settings...");
+            LoadSettings();
+            Console.WriteLine("Done loading settings.");
+            
+            Console.WriteLine("Generating C# source code...");
+            string outputClass = CreateOutput();
+            Console.WriteLine("Done generating C# source code.");
+
+            return outputClass;
         }
 
         private string Tabs(int count)
@@ -204,12 +269,33 @@ namespace Domenici.Utilities.Configuration
                 settingsList = new List<SettingProperties>();
                 SettingsLoader loader = new SettingsLoader(settingsList, SettingsManager.SectionSeparator, true, true);
 
-                foreach (string file in Directory.GetFiles(this.appSettingsFolder, "*.appsettings"))
+                switch (this.runMode)
                 {
-                    // Load settings file
-                    Console.WriteLine($"Loading application settings data on file: {file}");
-                    loader.LoadSettings(file, true);
-                    Console.WriteLine($"Done loading application settings data on file: {file}");
+                    case RunModes.SingleSourceFile:
+                        {
+                            // Load settings file
+                            Console.WriteLine("Loading application settings data");
+                            XmlDocument doc = new XmlDocument();
+                            doc.LoadXml(this.settingsFileContents);
+
+                            loader.LoadSettings(doc, true);
+                            Console.WriteLine("Done loading application settings data.");
+                        }
+
+                        break;
+
+                    case RunModes.MultipleSourceFiles:
+                        {
+                            foreach (string file in Directory.GetFiles(this.appSettingsFolder, "*.appsettings"))
+                            {
+                                // Load settings file
+                                Console.WriteLine($"Loading application settings data on file: {file}");
+                                loader.LoadSettings(file, true);
+                                Console.WriteLine($"Done loading application settings data on file: {file}");
+                            }
+                        }
+
+                        break;
                 }
             }
             catch (Exception e)
