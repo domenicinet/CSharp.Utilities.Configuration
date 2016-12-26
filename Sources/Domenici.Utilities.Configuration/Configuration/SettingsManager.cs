@@ -104,8 +104,6 @@ namespace Domenici.Utilities.Configuration
             XmlDocument doc = null;
             
             #region Validation: Throw an exception is settings files cannot be found. 
-            string path = AppDomain.CurrentDomain.BaseDirectory;
-
             //get the default path
             string defaultPath = ConfigurationManager.AppSettings[AppSettingsPathKeyName];
             
@@ -115,7 +113,7 @@ namespace Domenici.Utilities.Configuration
             if (!Path.IsPathRooted(defaultPath))
             {
                 //if relative path, get full path
-                defaultPath = Path.Combine(path, defaultPath);
+                defaultPath = Path.GetFullPath(defaultPath);
             }
 
             if (!System.IO.Directory.Exists(defaultPath))
