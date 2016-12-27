@@ -26,8 +26,6 @@ namespace Domenici.Utilities.Configuration
 
         #region Single source file mode variables
         private string settingsFileContents;
-        string classNamespace;
-        string className;
         #endregion
 
         #region Multiple source files mode variables
