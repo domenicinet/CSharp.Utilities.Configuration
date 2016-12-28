@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<appSettings timeout="300">
+  <section name="ItemSamples">
+    <item key="StringValue" value="Domenici.Net" />
+    <item key="IntegerValue" value="100" type="int" />
+    <item key="DecimalValue" value="99.90" type="decimal" />
+    <item key="BooleanValue" value="true" type="bool" />
+  </section>
+</appSettings>

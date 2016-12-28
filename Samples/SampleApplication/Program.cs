@@ -1,4 +1,5 @@
 ﻿using Domenici.Utilities.Configuration;
+using SampleApplication.domenici.settings;
 using SampleDependency;
 using System;
 
@@ -13,18 +14,22 @@ namespace SampleApplication
             Console.ReadKey();
             Console.WriteLine();
 
-            // Read all settings
-            string  applicationVersion = SampleApplicationSettings.ApplicationVersion;
-            string  stringSetting      = SampleApplicationSettings.DataSamples.StringSetting;
-            int     integerSetting     = SampleApplicationSettings.DataSamples.IntegerSetting;
-            decimal decimalSetting     = SampleApplicationSettings.DataSamples.DecimalSetting;
-            bool    booleanSetting     = SampleApplicationSettings.DataSamples.BooleanSetting;
-
-            Console.WriteLine($"App Version: {applicationVersion}");
-            Console.WriteLine($"String: {stringSetting}");
-            Console.WriteLine($"Integer: {integerSetting}");
-            Console.WriteLine($"Decimal: {decimalSetting}");
-            Console.WriteLine($"Boolean: {booleanSetting}");
+            // Read all settings from referenced library
+            Console.WriteLine("Read all settings from referenced library");
+            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine($"App Version: { SampleApplicationSettings.ApplicationVersion }");
+            Console.WriteLine($"String: { SampleApplicationSettings.DataSamples.StringSetting }");
+            Console.WriteLine($"Integer: { SampleApplicationSettings.DataSamples.IntegerSetting }");
+            Console.WriteLine($"Decimal: { SampleApplicationSettings.DataSamples.DecimalSetting }");
+            Console.WriteLine($"Boolean: { SampleApplicationSettings.DataSamples.BooleanSetting }");
+            
+            // Read all settings from generated class
+            Console.WriteLine("Read all settings from generated class");
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine($"String: { Sample.ItemSamples.StringValue }");
+            Console.WriteLine($"Integer: { Sample.ItemSamples.IntegerValue }");
+            Console.WriteLine($"Decimal: { Sample.ItemSamples.DecimalValue }");
+            Console.WriteLine($"Boolean: { Sample.ItemSamples.BooleanValue }");
 
             // Done
             Console.WriteLine();
