@@ -26,6 +26,7 @@ namespace Domenici.Utilities.Configuration
 
         #region Single source file mode variables
         private string settingsFileContents;
+        private string classNamespace;
         #endregion
 
         #region Multiple source files mode variables
@@ -49,8 +50,10 @@ namespace Domenici.Utilities.Configuration
         public StrongTyper(string settingsFileContents, string classNamespace, string className)
         {
             this.settingsFileContents = settingsFileContents;
-            this.runMode         = RunModes.SingleSourceFile;
-            this.outputType      = OutputTypes.SourceCode;
+            this.classNamespace = classNamespace;
+
+            this.runMode = RunModes.SingleSourceFile;
+            this.outputType = OutputTypes.SourceCode;
         }
 
         /// <summary>

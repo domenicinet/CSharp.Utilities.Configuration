@@ -53,13 +53,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="domenici.settings\default.appsettings" />
+    <None Include="domenici.settings\default.appsettings">
+      <SubType>Designer</SubType>
+      <LastGenOutput>default.Designer.cs</LastGenOutput>
+      <Generator>ConfigurationSettingsMaker</Generator>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SampleDependency\SampleDependency.csproj">
       <Project>{e5fdff72-3835-4131-8603-ba72796f2f1d}</Project>
       <Name>SampleDependency</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

@@ -49,7 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="domenici.settings\default.appsettings" />
+    <None Include="domenici.settings\default.appsettings">
+      <Generator>ConfigurationSettingsMaker</Generator>
+      <LastGenOutput>default.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

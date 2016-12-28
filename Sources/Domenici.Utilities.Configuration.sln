@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domenici.Utilities.Configur
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domenici.Utilities.Configuration.Tests", "Domenici.Utilities.Configuration.Tests\Domenici.Utilities.Configuration.Tests.csproj", "{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domenici.Utilities.Configuration.CustomTools.SettingsMaker", "Domenici.Utilities.Configuration.SettingsMakerCustomTool\Domenici.Utilities.Configuration.CustomTools.SettingsMaker.csproj", "{2DBB6362-27D6-4B25-A8A9-A55F0931CBBA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DBB6362-27D6-4B25-A8A9-A55F0931CBBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DBB6362-27D6-4B25-A8A9-A55F0931CBBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DBB6362-27D6-4B25-A8A9-A55F0931CBBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DBB6362-27D6-4B25-A8A9-A55F0931CBBA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,5 +47,6 @@ Global
 		{84FD91F9-FCD3-4412-801A-220CC3147C22} = {E190AEF9-4EA7-4D2C-AC85-A9C6BF054D51}
 		{0FE91D4A-34CD-4035-AF72-B626AB17AABE} = {012CC43A-2EC9-4E02-9252-803FF1B98BD7}
 		{19DFBE65-F9E6-445F-A68C-6AD2FC0726B6} = {EE155544-12B8-4675-A9A8-F01D2F3E6462}
+		{2DBB6362-27D6-4B25-A8A9-A55F0931CBBA} = {012CC43A-2EC9-4E02-9252-803FF1B98BD7}
 	EndGlobalSection
 EndGlobal
