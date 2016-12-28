@@ -27,6 +27,7 @@ namespace Domenici.Utilities.Configuration
         #region Single source file mode variables
         private string settingsFileContents;
         private string classNamespace;
+        private string className;
         #endregion
 
         #region Multiple source files mode variables
@@ -51,6 +52,7 @@ namespace Domenici.Utilities.Configuration
         {
             this.settingsFileContents = settingsFileContents;
             this.classNamespace = classNamespace;
+            this.className = className;
 
             this.runMode = RunModes.SingleSourceFile;
             this.outputType = OutputTypes.SourceCode;
@@ -196,7 +198,7 @@ namespace Domenici.Utilities.Configuration
 
             return Regex.Replace(result, "[^a-zA-Z0-9_]+", "_", RegexOptions.Compiled);
         }
-
+        
         private string CreateOutput()
         {
             StringBuilder sb = new StringBuilder();
@@ -210,9 +212,11 @@ namespace Domenici.Utilities.Configuration
             sb.Append(Tabs(0) + "// </auto-generated>\r\n");
             sb.Append(Tabs(0) + "//------------------------------------------------------------------------------\r\n");
             sb.Append(Tabs(0) + "\r\n");
-            sb.Append(Tabs(0) + "namespace Domenici.Utilities.Configuration\r\n");
+            sb.Append(Tabs(0) + "using Domenici.Utilities.Configuration;\r\n");
+            sb.Append(Tabs(0) + "\r\n");
+            sb.Append(Tabs(0) + string.Format("namespace {0}\r\n", !string.IsNullOrWhiteSpace(this.classNamespace) ? this.classNamespace : "Domenici.Utilities.Configuration"));
             sb.Append(Tabs(0) + "{\r\n");
-            sb.Append(Tabs(1) + string.Format("public static class {0}\r\n", FormatName(this.libraryName + "Settings")));
+            sb.Append(Tabs(1) + string.Format("public static class {0}\r\n", !string.IsNullOrWhiteSpace(this.className) ? this.className : FormatName(this.libraryName + "Settings")));
             sb.Append(Tabs(1) + "{\r\n");
 
             foreach (SettingProperties setting in this.settingsList)

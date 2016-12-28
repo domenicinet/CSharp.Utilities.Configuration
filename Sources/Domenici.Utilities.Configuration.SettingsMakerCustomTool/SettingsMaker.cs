@@ -38,6 +38,23 @@ Run command: devenv /setup
 NOTE: The command will run for a few of minutes and it's needed to make sure that Visual Studio's tools cache is reloaded.
 Launch Visual Studio again, your custom tool will be ready for use.
  */
+
+/*
+ * COMMANDS TO REGISTER/UNREGISTER LIBRARIES IN THE GAC
+ * 
+
+UNREGISTER LIBRARIES
+--------------------
+gacutil /u domenici.utilities.configuration
+gacutil /u ConfigurationSettingsMaker
+
+REGISTER LIBRARIES
+------------------
+gacutil /i C:\Domenici.NET\domenici.utilities\Domenici.Utilities.Configuration\Sources\Domenici.Utilities.Configuration.SettingsMakerCustomTool\bin\ConfigurationSettingsMaker.dll
+gacutil /i C:\Domenici.NET\domenici.utilities\Domenici.Utilities.Configuration\Sources\Domenici.Utilities.Configuration.SettingsMakerCustomTool\bin\Domenici.Utilities.Configuration.dll
+
+ *
+ */
 namespace Domenici.Utilities.Configuration.CustomTools
 {
     using System;
@@ -46,7 +63,6 @@ namespace Domenici.Utilities.Configuration.CustomTools
     using System.Runtime.InteropServices;
     using System.Text;
     using Configuration;
-    using System.Diagnostics;
 
     [Guid("E29E2A80-292A-4CCB-9433-1F6100CC6F77")]
     public class SettingsMaker : IVsSingleFileGenerator
@@ -65,7 +81,6 @@ namespace Domenici.Utilities.Configuration.CustomTools
             out uint pcbOutput, 
             IVsGeneratorProgress pGenerateProgress)
         {
-            Debug.WriteLine("Generating configuration code.");
             Console.WriteLine("Generating configuration code.");
             Console.WriteLine("Source path: " + wszInputFilePath);
             Console.WriteLine("Source namespace: " + wszDefaultNamespace);
@@ -74,7 +89,11 @@ namespace Domenici.Utilities.Configuration.CustomTools
 
             try
             {
-                StrongTyper st = new StrongTyper(bstrInputFileContents, wszDefaultNamespace, "Settings.cs");
+                int start = wszInputFilePath.LastIndexOf("\\") + 1;
+                string className = wszInputFilePath.Substring(start);
+                className = className.Substring(0, className.IndexOf("."));
+
+                StrongTyper st = new StrongTyper(bstrInputFileContents, wszDefaultNamespace, className);
                 output = st.CreateStronglyTypedOutput();
             }
             catch (Exception e)
