@@ -12,17 +12,21 @@ namespace Domenici.Utilities.Configuration
 {    
     public class StrongTyper
     {
+        #region OutputTypes
         public enum OutputTypes
-        { 
-            SourceCode      = 0,
+        {
+            SourceCode = 0,
             CompiledLibrary = 1
         }
+        #endregion
 
+        #region RunModes
         public enum RunModes
         {
-            SingleSourceFile    = 0,
+            SingleSourceFile = 0,
             MultipleSourceFiles = 1
-        }
+        } 
+        #endregion
 
         #region Single source file mode variables
         private string settingsFileContents;
@@ -39,6 +43,7 @@ namespace Domenici.Utilities.Configuration
 
         private List<SettingProperties> settingsList;
 
+        #region Constructors
         /// <summary>
         /// This constructor prepares the class for the generation of a strongly typed 
         /// C# file obtained by analyzing the given setting file.
@@ -49,8 +54,8 @@ namespace Domenici.Utilities.Configuration
         public StrongTyper(string settingsFileContents, string classNamespace, string className)
         {
             this.settingsFileContents = settingsFileContents;
-            this.runMode         = RunModes.SingleSourceFile;
-            this.outputType      = OutputTypes.SourceCode;
+            this.runMode = RunModes.SingleSourceFile;
+            this.outputType = OutputTypes.SourceCode;
         }
 
         /// <summary>
@@ -64,23 +69,24 @@ namespace Domenici.Utilities.Configuration
         /// <param name="outputType"></param>
         public StrongTyper(string appSettingsFolder, string outputFolder, string libraryName, OutputTypes outputType)
         {
-            
+
             if (!Directory.Exists(appSettingsFolder))
-            { 
+            {
                 throw new DirectoryNotFoundException(string.Format("Cannot find directory: {0}", appSettingsFolder));
             }
-            
+
             if (!Directory.Exists(outputFolder))
-            { 
+            {
                 throw new DirectoryNotFoundException(string.Format("Cannot find directory: {0}", outputFolder));
             }
 
             this.appSettingsFolder = appSettingsFolder;
-            this.outputFolder      = outputFolder;
-            this.libraryName       = libraryName;
-            this.runMode           = RunModes.MultipleSourceFiles;
-            this.outputType        = outputType;
-        }
+            this.outputFolder = outputFolder;
+            this.libraryName = libraryName;
+            this.runMode = RunModes.MultipleSourceFiles;
+            this.outputType = outputType;
+        } 
+        #endregion
 
         public void CreateStronglyTypedClass()
         {
@@ -179,21 +185,12 @@ namespace Domenici.Utilities.Configuration
             Console.WriteLine("Done generating C# source code.");
 
             return outputClass;
-        }
+        }        
 
-        private string Tabs(int count)
-        {
-            return string.Empty.PadLeft(count * 4);
-        }
-
-        private string FormatName(string name)
-        {
-            string result = name;
-            if (Regex.IsMatch(name[0].ToString(), "[0-9]")) result = "_" + name;
-
-            return Regex.Replace(result, "[^a-zA-Z0-9_]+", "_", RegexOptions.Compiled);
-        }
-
+        /// <summary>
+        /// Generate a C# class that stong-types the settings.
+        /// </summary>
+        /// <returns></returns>
         private string CreateOutput()
         {
             StringBuilder sb = new StringBuilder();
@@ -302,5 +299,20 @@ namespace Domenici.Utilities.Configuration
                 throw new SettingsException("Unexpected error while loading application settings. Please see the inner exception for more details.", e);
             }
         }
+
+        #region Helper methods
+        private string Tabs(int count)
+        {
+            return string.Empty.PadLeft(count * 4);
+        }
+
+        private string FormatName(string name)
+        {
+            string result = name;
+            if (Regex.IsMatch(name[0].ToString(), "[0-9]")) result = "_" + name;
+
+            return Regex.Replace(result, "[^a-zA-Z0-9_]+", "_", RegexOptions.Compiled);
+        } 
+        #endregion
     }
 }

@@ -46,3 +46,6 @@ Sources/CustomTool/bin/Debug/Microsoft.VisualStudio.Utilities.dll
 Sources/CustomTool/bin/Debug/Microsoft.VisualStudio.Utilities.xml
 Sources/CustomTool/bin/Debug/Microsoft.VisualStudio.VSHelp.dll
 Sources/CustomTool/bin/Debug/stdole.dll
+Samples/SampleApplication/SampleApplication.csproj.user
+Samples/SampleDependency/SampleDependency.csproj.user
+Sources/Domenici.Utilities.Configuration.Tests/Domenici.Utilities.Configuration.Tests.csproj.user

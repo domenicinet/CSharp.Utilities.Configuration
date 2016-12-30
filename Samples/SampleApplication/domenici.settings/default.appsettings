@@ -6,9 +6,14 @@
     <item key="IntegerSetting" value="100" type="int" />
     <item key="DecimalSetting" value="99.90" type="decimal" />
     <item key="BooleanSetting" value="true" type="bool" />
+
+    <!-- This setting will not be compiled -->
+    <item key="IgnoredSetting" value="0" source="external" />
   </section>
-  <section name="SampleDependency">
-    <item key="ApplicationName" value="Sample Application" source="external" />
+
+  <!-- This section will not be compiled -->
+  <section name="SampleDependency" source="external">
+    <item key="ApplicationName" value="Sample Application" />
     <item key="WelcomeMessage">
       ******************
       {0}

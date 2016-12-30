@@ -89,61 +89,65 @@ namespace Domenici.Utilities.Configuration
         {
             Console.WriteLine($"Found section: {sectionNode.Attributes["name"].Value}");
 
-            // Get all settings
-            foreach (XmlNode node in sectionNode.SelectNodes("item"))
+            if (!this.ignoreExternalSource || (null == sectionNode.Attributes["source"] || "external" != sectionNode.Attributes["source"].Value))
             {
-                try
+                #region Get all settings
+                foreach (XmlNode node in sectionNode.SelectNodes("item"))
                 {
-                    string key   = node.Attributes["key"].Value;
-                    
-                    if (!this.ignoreExternalSource || (null == node.Attributes["source"] || "external" != node.Attributes["source"].Value))
+                    try
                     {
-                        if (!string.IsNullOrWhiteSpace(path))
-                        {
-                            key = string.Format("{0}{1}{2}{3}{4}",
-                                          path,
-                                          this.sectionSeparator,
-                                          sectionNode.Attributes["name"].Value,
-                                          this.sectionSeparator,
-                                          key);
-                        }
-                        else
-                        {
-                            key = string.Format("{0}{1}{2}",
-                                          sectionNode.Attributes["name"].Value,
-                                          this.sectionSeparator,
-                                          key);
-                        }
+                        string key = node.Attributes["key"].Value;
 
-                        string value = null;
-
-                        if (null != node.Attributes["value"])
+                        if (!this.ignoreExternalSource || (null == node.Attributes["source"] || "external" != node.Attributes["source"].Value))
                         {
-                            value = node.Attributes["value"].Value;
+                            if (!string.IsNullOrWhiteSpace(path))
+                            {
+                                key = string.Format("{0}{1}{2}{3}{4}",
+                                              path,
+                                              this.sectionSeparator,
+                                              sectionNode.Attributes["name"].Value,
+                                              this.sectionSeparator,
+                                              key);
+                            }
+                            else
+                            {
+                                key = string.Format("{0}{1}{2}",
+                                              sectionNode.Attributes["name"].Value,
+                                              this.sectionSeparator,
+                                              key);
+                            }
+
+                            string value = null;
+
+                            if (null != node.Attributes["value"])
+                            {
+                                value = node.Attributes["value"].Value;
+                            }
+                            else
+                            {
+                                // This value is a multi-line string, possibly within a CDATA block.
+                                value = node.FirstChild.Value;
+                            }
+
+                            this.settingsList.Add(new SettingProperties()
+                            {
+                                Key = key,
+                                Value = value,
+                                Type = node.Attributes["type"] == null ? "string" : (string.IsNullOrEmpty(node.Attributes["type"].Value) ? "string" : node.Attributes["type"].Value)
+                            });
+
+                            Console.WriteLine($"Found setting: {node.Attributes["key"].Value}");
                         }
-                        else
-                        {
-                            // This value is a multi-line string, possibly within a CDATA block.
-                            value = node.FirstChild.Value;
-                        }
-
-                        this.settingsList.Add(new SettingProperties()
-                        {
-                            Key   = key,
-                            Value = value,
-                            Type  = node.Attributes["type"] == null ? "string" : (string.IsNullOrEmpty(node.Attributes["type"].Value) ? "string" : node.Attributes["type"].Value)
-                        });
-
-                        Console.WriteLine($"Found setting: {node.Attributes["key"].Value}");
+                    }
+                    catch (Exception e)
+                    {
+                        if (!this.ignoreDuplicates) throw e;
                     }
                 }
-                catch (Exception e)
-                {
-                    if (!this.ignoreDuplicates) throw e;
-                }
+                #endregion
             }
 
-            // Get inner sections
+            #region Get inner sections
             foreach (XmlNode node in sectionNode.SelectNodes("section"))
             {
                 if (!string.IsNullOrWhiteSpace(path))
@@ -160,6 +164,7 @@ namespace Domenici.Utilities.Configuration
                     LoadSection(sectionNode.Attributes["name"].Value, node);
                 }
             }
+            #endregion
         }
     }
 }
