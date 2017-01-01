@@ -1,0 +1,303 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Domenici.utilities.configuration by domenicinet</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/domenicinet/Domenici.Utilities.Configuration">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/domenicinet/Domenici.Utilities.Configuration/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/domenicinet/Domenici.Utilities.Configuration/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Domenici.utilities.configuration</h1>
+          <p>Strongly-typed configuration settings for .NET projects</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/domenicinet">domenicinet</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="csharputilitiesconfiguration" class="anchor" href="#csharputilitiesconfiguration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CSharp.Utilities.Configuration</h1>
+
+<p>Strongly-typed configuration settings for .NET projects</p>
+
+<p>This library (in its proprietary form) has been used for over 1 year in several live projects in the finance sector. 
+I am now sharing this work as an open source project beca I believe there are a lot of benefits in using strongly-typed settings is all applications.
+Please give it a try - there's a Visual Studio sample solution in folder <b>/samples</b> that really tells it all - and feel free to comment or contribute in any way you deem appropriate. </p>
+
+<h2>
+<a id="lets-get-to-the-point-right-away" class="anchor" href="#lets-get-to-the-point-right-away" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let's get to the point right away</h2>
+
+<p>You are going to move from this:</p>
+
+<pre><code>int maxRetries = Convert.ToInt32(WebConfigurationManager.AppSettings["maxRetries"]);
+</code></pre>
+
+<p>to this:</p>
+
+<pre><code>int maxRetries = FrontEndSettings.Login.MaxRetries;
+</code></pre>
+
+<h2>
+<a id="how-does-it-happen" class="anchor" href="#how-does-it-happen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How does it happen?</h2>
+
+<p>This library allows you to create strongly-types application settings in your .NET projects.
+Application settings are stored in XML files, much similar in form and intent to the appSettings tag in your web.config or app.config files.</p>
+
+<h4>
+<a id="typical-webappconfig-scenario" class="anchor" href="#typical-webappconfig-scenario" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Typical web/app.config scenario</h4>
+
+<p>Your typical web.config/appSettings section could look like this:</p>
+
+<pre><code>&lt;appSettings&gt;
+    &lt;add key="login:maxReties" value="3" /&gt; 
+    &lt;add key="login:minPasswordLength" value="8" /&gt;  
+    &lt;add key="welcomeMessage" value="welcome back,\r\n&amp;lt;b&amp;gt;We missed you!&amp;lt;/b&amp;gt;" /&gt;          
+&lt;/appSettings&gt;
+</code></pre>
+
+<p>You will then reference these settings as follows:</p>
+
+<pre><code>int maxRetries = Convert.ToInt32(WebConfigurationManager.AppSettings["login:maxRetries"]);
+int minPwdLength = Convert.ToInt32(WebConfigurationManager.AppSettings["login:minPasswordLength"]);
+this.welcomeDiv.Html = WebConfigurationManager.AppSettings["welcomeMessage"];
+</code></pre>
+
+<h4>
+<a id="new-domeniciutilitiesconfiguration-scenario" class="anchor" href="#new-domeniciutilitiesconfiguration-scenario" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>New Domenici.Utilities.Configuration scenario</h4>
+
+<p>This library's settings would look like this:</p>
+
+<pre><code>&lt;appSettings&gt;
+    &lt;section name="Login"&gt;
+        &lt;item key="MaxReties" value="3" type="int" /&gt; 
+        &lt;item key="MinPasswordLength" value="8" type="int" /&gt; 
+    &lt;/section&gt;
+    &lt;add key="WelcomeMessage"&gt;&lt;![CDATA[welcome back,
+&lt;b&gt;We missed you!&lt;/b&gt;]]&gt;&lt;/item&gt;
+&lt;/appSettings&gt;
+</code></pre>
+
+<p>You will then reference these settings as follows:</p>
+
+<pre><code>int maxRetries = FrontEndSettings.Login.MaxRetries;
+int minPwdLength = FrontEndSettings.Login.MinPasswordLength;
+this.welcomeDiv.Html = FrontEndSettings.WelcomeMessage;
+</code></pre>
+
+<h2>
+<a id="transitioning" class="anchor" href="#transitioning" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Transitioning</h2>
+
+<p>The library allows you to read settings in two ways:</p>
+
+<h4>
+<a id="array-key" class="anchor" href="#array-key" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Array key</h4>
+
+<p>You can retrieve values in the same way you use the ConfigurationManager.AppSettings["key"] to read settings from a config file.
+This is useful when you start porting your existing code to the new library, as it allows you to move settings away from you web.config or app.config files without having to refactor too much code.</p>
+
+<pre><code>int maxRetries = Convert.ToInt32(WebConfigurationManager.AppSettings["maxRetries"]);
+</code></pre>
+
+<p>becomes:</p>
+
+<pre><code>int maxRetries = Convert.ToInt32(SettingsManager.GetValue("maxRetries"));
+</code></pre>
+
+<h4>
+<a id="strongly-typed" class="anchor" href="#strongly-typed" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Strongly-typed</h4>
+
+<p>You can retrieve any value by using it's property in the auto-generated settings class.
+This is the default way of using this library, and the reason why you're reading this.</p>
+
+<pre><code>int maxRetries = Convert.ToInt32(WebConfigurationManager.AppSettings["maxRetries"]);
+</code></pre>
+
+<p>becomes:</p>
+
+<pre><code>int maxRetries = FrontEndSettings.MaxRetries;
+</code></pre>
+
+<h2>
+<a id="setting-up-your-visual-studio-project" class="anchor" href="#setting-up-your-visual-studio-project" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting up your Visual Studio project</h2>
+
+<p>This library's companion app, SettingsMaker.exe, can generate your strongly-typed classes as source code within your project or as DLL files that you can reference from your project (this is my preferred way).</p>
+
+<h3>
+<a id="step-1" class="anchor" href="#step-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 1</h3>
+
+<p>You start by creating a folder in your project that will hold all of your settings files. Yes, you may split your settings into different files and SettingsMaker will merge them into a single project class :D</p>
+
+<p>All settings files must have extension <b>.appsettings</b></p>
+
+<p>In this example, the folder is called <b>domenici.settings</b></p>
+
+<h3>
+<a id="step-2" class="anchor" href="#step-2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 2</h3>
+
+<p>You add the following key to your web.config or app.config files:</p>
+
+<pre><code>&lt;appSettings&gt;
+    &lt;add key="Domenici.Net:Configuration:AppSettingsPath" value="domenici.settings" /&gt;          
+&lt;/appSettings&gt;
+</code></pre>
+
+<p>"value" is a relative (my favorite) or absolute path to the folder where you hold your settings files.</p>
+
+<h3>
+<a id="step-3" class="anchor" href="#step-3" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 3</h3>
+
+<p>Download Domenici.Utilities.Configuration from NUGet, it will be located in your solution's "packages" folder.</p>
+
+<h3>
+<a id="step-4" class="anchor" href="#step-4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 4</h3>
+
+<p>In Visual Studio, select your project then ALT+ENTER to view the project's settings. Select "Build Events" then enter the following pre-build event:</p>
+
+<pre><code>$(SolutionDir)packages\Domenici.Utilities.configuration-net40\Domenici.Utilities.Configuration.SettingsMaker\Domenici.Utilities.Configuration.SettingsMaker.exe $(ProjectDir)domenici.settings $(SolutionDir)packages\domenici.settings $(ProjectName) /library
+</code></pre>
+
+<p>This pre-build batch launches the Settings Maker that you have obtained via NUGet with the following parameters:
+1. Path to the folder containing all settings
+2. Path to the folder that will contain the generated library (the folder must exists)
+3. Name of the library (here we use the project's name)
+3. Type of output, where <b>/library</b> indicated that we wish to generate a compiled DLL (omitting <b>/library</b> will generate a C# class file)</p>
+
+<p>Once you build your solution, the project's settings will be copied as a DLL in <b>/packages/domenici.settings</b></p>
+
+<h3>
+<a id="step-5" class="anchor" href="#step-5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 5</h3>
+
+<p>Compile your project then add a reference to its settings library.
+If the project's name is <b>FrontEnd</b>, you will find library <b>FrontEndSettings.dll</b> in <b>packages/domenici.settings</b></p>
+
+<h3>
+<a id="step-6" class="anchor" href="#step-6" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Step 6</h3>
+
+<p>From now on, you will be able to reference your strongly-typed settings from class:</p>
+
+<pre><code>Domenici.Utilities.Configuration.FrontEndSettings
+</code></pre>
+
+<h2>
+<a id="format-of-the-settings-file" class="anchor" href="#format-of-the-settings-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Format of the settings file</h2>
+
+<p>A settings file must have extension .appsettings and it must have this structure:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;appSettings&gt;
+    &lt;item key="RootItem" value="Hello" /&gt;
+&lt;/appSettings&gt;
+</code></pre>
+
+<p>Which is used as:</p>
+
+<pre><code>string value = FrontEndSettings.RootItem;
+</code></pre>
+
+<h3>
+<a id="specifying-types-other-than-string" class="anchor" href="#specifying-types-other-than-string" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Specifying types other than string</h3>
+
+<p>All settings are returned as <b>string</b> by default, but you can override this behaviour by specifying a type:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;appSettings&gt;
+    &lt;item key="Age" value="44" type="int" /&gt;
+&lt;/appSettings&gt;
+</code></pre>
+
+<p>Which is used as:</p>
+
+<pre><code>int age = FrontEndSettings.Age;
+</code></pre>
+
+<h3>
+<a id="specifying-multi-line-values" class="anchor" href="#specifying-multi-line-values" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Specifying multi-line values</h3>
+
+<p>Another great advantage of this library is the possibility of specifying values that span multiple lines, as follows:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;appSettings&gt;
+    &lt;item key="Welcome"&gt;
+        Welcome my son, 
+        welcome to The Machine!
+    &lt;/item&gt;
+&lt;/appSettings&gt;
+</code></pre>
+
+<p>You may also use CDATA blocks in order to avoid escaping characters: </p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;appSettings&gt;
+    &lt;item key="Welcome"&gt;&lt;![CDATA[
+        Welcome my son, 
+        &lt;b&gt;welcome to &lt;i&gt;The Machine&lt;/i&gt;!&lt;/b&gt;
+    ]]&gt;&lt;/item&gt;
+&lt;/appSettings&gt;
+</code></pre>
+
+<h2>
+<a id="sections" class="anchor" href="#sections" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Sections</h2>
+
+<p>You can add any number of nested sections. For instance, this settings file:</p>
+
+<pre><code>&lt;?xml version="1.0" encoding="utf-8" ?&gt;
+&lt;appSettings&gt;
+    &lt;item key="Welcome" value="Welcome!!!" /&gt;
+    &lt;section name="Login"&gt;
+        &lt;item key="MaxPasswordLength" value="7" type="int" /&gt;
+        &lt;section name="ErrorMessages"&gt;
+            &lt;item key="Message1" value="Wrong user name or passowrd" /&gt;
+        &lt;/section&gt;
+    &lt;/section&gt;
+&lt;/appSettings&gt;
+</code></pre>
+
+<p>Will be used as follows:</p>
+
+<pre><code>string welcomeMessage = FrontEndSettings.Welcome;
+int maxPwdLength = FrontEndSettings.Login.MaxPasswordLength;
+string wrongCredentialsMessage = FrontEndSettings.Login.ErrorMessages.Message1;
+</code></pre>
+
+<h2>
+<a id="conclusions" class="anchor" href="#conclusions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conclusions</h2>
+
+<p>I believe this library to be useful in reducing errors due to mistypings of strings and other constants in code. </p>
+
+<p>I want the flexibility to change costants at runtime without having to recompile anything, and I also want to make sure that code is solid and it will not fail because I wrote "pasword" where I should have written "password".</p>
+
+<p>I welcome you to try this library out and to contribute to it in any way you feel comfortable with: a comment, a suggestion, a code patch or a whole tool to make it better! </p>
+
+<p>Thank You</p>
+
+<p>Alex Domenici</p>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
