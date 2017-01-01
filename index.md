@@ -1,4 +1,4 @@
-# CSharp.Utilities.Configuration
+# Domenici.Utilities.Configuration
 Strongly-typed configuration settings for .NET projects
 
 This library (in its proprietary form) has been used for over 1 year in several live projects in the finance sector. 
@@ -54,7 +54,7 @@ int minPwdLength = FrontEndSettings.Login.MinPasswordLength;
 this.welcomeDiv.Html = FrontEndSettings.WelcomeMessage;
 ```
 
-## Transitioning
+## Transitioning from web.config to Domenici.Utilities.Configuration
 The library allows you to read settings in two ways:
 #### Array key
 You can retrieve values in the same way you use the ConfigurationManager.AppSettings["key"] to read settings from a config file.
@@ -194,6 +194,24 @@ Will be used as follows:
 string welcomeMessage = FrontEndSettings.Welcome;
 int maxPwdLength = FrontEndSettings.Login.MaxPasswordLength;
 string wrongCredentialsMessage = FrontEndSettings.Login.ErrorMessages.Message1;
+```
+
+## Excluding items and sections from compilation
+It is often useful to hide some items or whole sections from compilation, especially when defining settings that are referenced in your dependencies.
+You can define exclusions by adding the tag `source="external"` to items and sections (all items and subsections within the section will be excluded as well):
+```
+<?xml version="1.0" encoding="utf-8" ?>
+<appSettings>
+	<!-- This item is excluded from compilation -->
+    <item key="SampleItem" value="Welcome!" source="external" />
+	<!-- This section, all inner items and inner sections are excluded from compilation -->
+    <section name="Login" source="external">
+        <item key="MaxPasswordLength" value="7" type="int" />
+        <section name="ErrorMessages">
+            <item key="Message1" value="Wrong user name or passowrd" />
+        </section>
+    </section>
+</appSettings>
 ```
 
 ## Conclusions
