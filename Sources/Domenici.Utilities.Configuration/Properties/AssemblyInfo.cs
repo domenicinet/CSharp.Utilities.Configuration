@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Domenici.NET")]
 [assembly: AssemblyProduct("Domenici.Utilities.Configuration")]
-[assembly: AssemblyCopyright("Copyright © 2016 Alessandro Domenici (alx.domenici@gmail.com)")]
+[assembly: AssemblyCopyright("Copyright © 2016-2017 Alessandro Domenici (alx.domenici@gmail.com)")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
