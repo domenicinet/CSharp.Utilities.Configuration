@@ -145,26 +145,26 @@ namespace Domenici.Utilities.Configuration
                     }
                 }
                 #endregion
-            }
 
-            #region Get inner sections
-            foreach (XmlNode node in sectionNode.SelectNodes("section"))
-            {
-                if (!string.IsNullOrWhiteSpace(path))
+                #region Get inner sections
+                foreach (XmlNode node in sectionNode.SelectNodes("section"))
                 {
-                    LoadSection(
-                        string.Format("{0}{1}{2}",
-                                      path,
-                                      SettingsManager.SectionSeparator,
-                                      sectionNode.Attributes["name"].Value),
-                        node);
+                    if (!string.IsNullOrWhiteSpace(path))
+                    {
+                        LoadSection(
+                            string.Format("{0}{1}{2}",
+                                          path,
+                                          SettingsManager.SectionSeparator,
+                                          sectionNode.Attributes["name"].Value),
+                            node);
+                    }
+                    else
+                    {
+                        LoadSection(sectionNode.Attributes["name"].Value, node);
+                    }
                 }
-                else
-                {
-                    LoadSection(sectionNode.Attributes["name"].Value, node);
-                }
+                #endregion
             }
-            #endregion
         }
     }
 }
