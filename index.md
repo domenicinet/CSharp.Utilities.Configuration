@@ -1,5 +1,5 @@
 # Domenici.Utilities.Configuration
-Strongly-typed configuration settings for C#.NET projects
+Strongly-typed configuration settings for .NET projects
 
 This library (in its proprietary form) has been used for over 1 year in several live projects in the finance sector. 
 I am now sharing this work as an open source project beca I believe there are a lot of benefits in using strongly-typed settings is all applications.
@@ -22,11 +22,11 @@ Application settings are stored in XML files, much similar in form and intent to
 #### Typical web/app.config scenario
 Your typical web.config/appSettings section could look like this:
 ```
-<appSettings>
-    <add key="login:maxReties" value="3" /> 
-    <add key="login:minPasswordLength" value="8" />  
-    <add key="welcomeMessage" value="welcome back,\r\n&lt;b&gt;We missed you!&lt;/b&gt;" />          
-</appSettings>
+&lt;appSettings>
+    &lt;add key="login:maxReties" value="3" /> 
+    &lt;add key="login:minPasswordLength" value="8" />  
+    &lt;add key="welcomeMessage" value="welcome back,\r\n&lt;b&gt;We missed you!&lt;/b&gt;" />          
+&lt;/appSettings>
 ```
 You will then reference these settings as follows:
 ```
