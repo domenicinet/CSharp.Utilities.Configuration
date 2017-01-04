@@ -22,11 +22,11 @@ Application settings are stored in XML files, much similar in form and intent to
 #### Typical web/app.config scenario
 Your typical web.config/appSettings section could look like this:
 ```
-&lt;appSettings>
-    &lt;add key="login:maxReties" value="3" /> 
-    &lt;add key="login:minPasswordLength" value="8" />  
-    &lt;add key="welcomeMessage" value="welcome back,\r\n&lt;b&gt;We missed you!&lt;/b&gt;" />          
-&lt;/appSettings>
+<appSettings>
+    <add key="login:maxReties" value="3" /> 
+    <add key="login:minPasswordLength" value="8" />  
+    <add key="welcomeMessage" value="welcome back,\r\n&lt;b&gt;We missed you!&lt;/b&gt;" />          
+</appSettings>
 ```
 You will then reference these settings as follows:
 ```
