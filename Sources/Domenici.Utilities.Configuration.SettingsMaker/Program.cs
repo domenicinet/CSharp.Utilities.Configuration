@@ -3,6 +3,15 @@ using System;
 
 namespace DomeniciSettingsManager
 {
+    /// <summary>
+    /// Generate configuration library or source code.
+    /// </summary>
+    /// <param name="args">
+    /// 0 - Input folder
+    /// 1 - Output folder
+    /// 2 - Project name
+    /// 3 - Type ("/library" or "/code")
+    /// </param>
     class Program
     {
         static void Main(string[] args)
