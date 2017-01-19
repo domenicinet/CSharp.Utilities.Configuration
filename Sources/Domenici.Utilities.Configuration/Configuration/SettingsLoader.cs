@@ -97,6 +97,11 @@ namespace Domenici.Utilities.Configuration
                     try
                     {
                         string key = node.Attributes["key"].Value;
+                        
+                        if (this.overrideExisting)
+                        {
+                            settingsList.RemoveAll(x => x.Key.Contains(key));
+                        }
 
                         if (!this.ignoreExternalSource || (null == node.Attributes["source"] || "external" != node.Attributes["source"].Value))
                         {
