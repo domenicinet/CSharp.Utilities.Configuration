@@ -44,7 +44,7 @@ namespace Domenici.Utilities.Configuration
 
                         if (this.overrideExisting)
                         {
-                            settingsList.RemoveAll(x => x.Key.Contains(key));
+                            settingsList.RemoveAll(x => x.Key.Equals(key));
                         }
 
                         string value = null;
@@ -98,11 +98,6 @@ namespace Domenici.Utilities.Configuration
                     {
                         string key = node.Attributes["key"].Value;
                         
-                        if (this.overrideExisting)
-                        {
-                            settingsList.RemoveAll(x => x.Key.Contains(key));
-                        }
-
                         if (!this.ignoreExternalSource || (null == node.Attributes["source"] || "external" != node.Attributes["source"].Value))
                         {
                             if (!string.IsNullOrWhiteSpace(path))
@@ -132,6 +127,11 @@ namespace Domenici.Utilities.Configuration
                             {
                                 // This value is a multi-line string, possibly within a CDATA block.
                                 value = node.FirstChild.Value;
+                            }
+                            
+                            if (this.overrideExisting)
+                            {
+                                settingsList.RemoveAll(x => x.Key.Equals(key));
                             }
 
                             this.settingsList.Add(new SettingProperties()
