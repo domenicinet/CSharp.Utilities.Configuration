@@ -49,3 +49,4 @@ Sources/CustomTool/bin/Debug/stdole.dll
 Samples/SampleApplication/SampleApplication.csproj.user
 Samples/SampleDependency/SampleDependency.csproj.user
 Sources/Domenici.Utilities.Configuration.Tests/Domenici.Utilities.Configuration.Tests.csproj.user
+Sources/Domenici.Utilities.Configuration.Tests/bin/Domenici.Utilities.Configuration.Tests.dll
