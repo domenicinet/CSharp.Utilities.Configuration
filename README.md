@@ -100,6 +100,7 @@ You add the following key to your web.config or app.config files:
 "value" is a relative (my favorite) or absolute path to the folder where you hold your settings files.
 
 If your project is a web application, you also need to ensure that clients won't be able to download the configuration file so you need to add the following tags in the configuration section:
+```
 <security>
     <requestFiltering>            
         <hiddenSegments>
@@ -108,6 +109,7 @@ If your project is a web application, you also need to ensure that clients won't
         </hiddenSegments>
     </requestFiltering>
 </security>  
+```
 
 ### Step 3
 Download Domenici.Utilities.Configuration from NUGet, it will be located in your solution's "packages" folder.
