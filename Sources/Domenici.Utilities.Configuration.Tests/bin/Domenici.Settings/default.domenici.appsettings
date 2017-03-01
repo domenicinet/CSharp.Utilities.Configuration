@@ -8,22 +8,4 @@
     <item key="TestSetting3"><![CDATA[This is a test setting.]]></item>
     <item key="IntegerSetting3" type="int"><![CDATA[100]]></item>
   
-    <section name="MockingWithDefaults">
-      <item key="TestSetting1" value="This is a string." mock="String value." />
-      <item key="IntegerSetting1" value="100" type="int" mock="5" />
-      <item key="TestSetting2" mock="String value.">This is a test setting.</item>
-      <item key="IntegerSetting2" type="int" mock="5">100</item>
-      <item key="TestSetting3" mock="String value."><![CDATA[This is a test setting.]]></item>
-      <item key="IntegerSetting3" type="int" mock="5"><![CDATA[100]]></item>
-    </section>
-  
-  <section name="MockingWithoutDefaults">
-    <item key="TestSetting1" value="This is a test setting." />
-    <item key="IntegerSetting1" value="100" type="int" />
-    <item key="TestSetting2">This is a test setting.</item>
-    <item key="IntegerSetting2" type="int">100</item>
-    <item key="TestSetting3"><![CDATA[This is a test setting.]]></item>
-    <item key="IntegerSetting3" type="int"><![CDATA[100]]></item>
-  </section>
-  
 </appSettings>

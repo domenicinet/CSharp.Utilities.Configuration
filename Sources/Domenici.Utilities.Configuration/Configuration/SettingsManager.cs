@@ -199,6 +199,10 @@ namespace Domenici.Utilities.Configuration
 
         static void timeoutTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            /*
+             * Stop the timer and dispose it, it will be 
+             * reinstantiated in the call to LoadSettings()
+             */
             timeoutTimer.Stop();
             timeoutTimer.Dispose();
 
@@ -225,7 +229,7 @@ namespace Domenici.Utilities.Configuration
         {
             try
             {
-                var data = settingsList.Where(x => x.Key.Contains(key)).FirstOrDefault();
+                var data = settingsList.Where(x => x.Key.Equals(key)).FirstOrDefault();
                 return Convert.ChangeType(data.Value, t);
             }
             catch (Exception e)
