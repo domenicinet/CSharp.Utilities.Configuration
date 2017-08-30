@@ -1,7 +1,8 @@
 # Domenici.Utilities.Configuration
 Strongly-typed configuration settings for .NET projects
 
-This library (in its proprietary form) has been used for over 1 year in several live projects in the finance sector. 
+I created this library as a 
+This library, in its proprietary form, has been used for over 2 year in several live projects (many in the finance sector). 
 I am now sharing this work as an open source project because I believe there are a lot of benefits in using strongly-typed settings is all applications.
 Please give it a try - there's a Visual Studio sample solution in folder <b>/samples</b> that really tells it all - and feel free to comment or contribute in any way you deem appropriate. 
 
